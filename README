@@ -1,0 +1,5 @@
+detourViewer
+
+This is a simple leaflet app for displaying detours in OSM database.
+
+Currently it is only a stub.
