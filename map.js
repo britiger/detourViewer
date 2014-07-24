@@ -67,9 +67,11 @@ function startEndPoint(feature, latlng) {
 }
 
 function styleRelation (feature) {
-	if(feature.properties.detour.startsWith("A"))
-	        return {color: "blue",  opacity: 1 };
-	if(feature.properties.detour.startsWith("B"))
-	        return {color: "orange",  opacity: 1 };
+	if(feature.properties.detour) {
+		if(feature.properties.detour.startsWith("A"))
+			return {color: "blue",  opacity: 1 };
+		if(feature.properties.detour.startsWith("B"))
+			return {color: "orange",  opacity: 1 };
+	}
         return {color: "red",  opacity: 1 };
 }
