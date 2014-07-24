@@ -58,24 +58,17 @@ function outputRefs(&$refs) {
 <head>
 <meta charset="utf-8">
 <title>detourViewer</title>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="awesome-markers/leaflet.awesome-markers.css" />
+<link rel="stylesheet" href="style.css" />
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-<script src="overpasslayer.js"></script>
+<script src="awesome-markers/leaflet.awesome-markers.js"></script>
 
-<style>
-body {
-	font-size: 0.7em;
-}
-#roadlist {
-	width: 150px;
-	float:left;
-}
-#map { margin-left: 155px; height: 500px; width: 800px;}
-</style>
 <script>
 $(function() {
 $( "#roadlist" ).accordion({
@@ -85,14 +78,16 @@ heightStyle: "content"
 </script>
 </head>
 <body>
-	<h1>List of detours by road</h1>
-	<div>
+	<div id="leftside">
+		<h1>List of detour relations by road</h1>
 		<div id="roadlist">
-			<?php output(); ?>
+		<?php output(); ?>
 		</div>
-		<div id="map"></div>
-		<script src="map.js"></script>
 	</div>
+	<div id="info">
+	</div>
+	<div id="map"></div>
+	<script src="map.js"></script>
 </body>
 </html>
 

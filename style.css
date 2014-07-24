@@ -1,0 +1,35 @@
+#leftside {
+	font-size: 0.7em;
+	position: absolute;	
+	width: 250px;
+	bottom: 130px;
+	left: 0px;
+	top: 0px;
+	overflow: auto;	
+}
+#info {
+	font-size: 0.7em;
+	border-top: 2px solid gray;
+	position: absolute;	
+	height: 130px;
+	width: 250px;
+	bottom: 0px;
+	left: 0px;
+	overflow: auto;	
+}
+#map { 
+	position: absolute; 
+	top: 0px; 
+	bottom: 0px; 
+	left: 250px; 
+	right: 0px;
+}
+.ch-s:before {
+	content: 'S';
+}
+.ch-e:before {
+	content: 'E';
+}
+.ch-unk:before {
+	content: '?';
+}
