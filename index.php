@@ -24,14 +24,14 @@ foreach($xml->relation as $relation) {
 			$op = $values['operator'];
 		else
 			$op = "unknown";
-		$list[$det][$values['ref']] = $values;
-		$listByOp[$op][$det][$values['ref']] = $values; // Store Roads by Operator
+		$list[$det][$values['id']] = $values;
+		$listByOp[$op][$det][$values['id']] = $values; // Store Roads by Operator
 	}
 
 }
 
 // Sort streets
-ksort($list);
+uksort($list, "sortNumberCallback");
 ksort($listByOp);
 
 function outputByOp ($list) {
@@ -39,6 +39,7 @@ function outputByOp ($list) {
 	foreach($list as $op=>$roads) {
 		print "<h2>$op</h2>";
 		print '<div class="accord">';
+		uksort($list, "sortNumberCallback");
 		output($roads);
 		print '</div>';
 	}
@@ -55,7 +56,7 @@ function output ($list) {
 }
 
 function outputRefs(&$refs) {
-	ksort($refs);
+	usort($refs, "sortNumberCallbackValue");
 
 	foreach($refs as $ref) {
 		print "<li>";
@@ -66,6 +67,38 @@ function outputRefs(&$refs) {
 		print "</a>";
 		print "</li>";
 	}
+}
+
+// Test the value for an Char+Number format, if correct split and give back an array
+function convAlphaNum($value) {
+	$first = substr($value,0,1);
+	$last = trim(substr($value,1));
+
+	if(is_numeric($first)) return false;
+	if(empty($last)) return false;
+	if(!is_numeric(substr($last,0,1))) return false;
+
+	$number = intval($last, 10);
+	if($number < 1) return false;
+
+	return array($first, $number); // correct combination
+}
+
+function sortNumberCallbackValue($a, $b) {
+	return sortNumberCallback($a['ref'], $b['ref']);
+}
+
+function sortNumberCallback($a, $b) {
+	$aa = convAlphaNum($a);
+	$ba = convAlphaNum($b);
+
+	if(!$aa || !$ba)
+		return strcasecmp($a, $b);
+
+	if(strcasecmp($aa[0], $ba[0]) == 0)
+		return $aa[1] - $ba[1];
+	else
+		return strcasecmp($aa[0], $ba[0]);
 }
 
 ?><!doctype html>
