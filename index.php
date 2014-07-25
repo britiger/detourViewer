@@ -39,7 +39,7 @@ function outputByOp ($list) {
 	foreach($list as $op=>$roads) {
 		print "<h2>$op</h2>";
 		print '<div class="accord">';
-		uksort($list, "sortNumberCallback");
+		uksort($roads, "sortNumberCallback");
 		output($roads);
 		print '</div>';
 	}
