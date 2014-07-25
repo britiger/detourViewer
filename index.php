@@ -9,7 +9,7 @@ foreach($xml->relation as $relation) {
 	$values['id'] = (string) $relation['id'];
 
 	foreach($relation->tag as $tag) {
-		if($tag['k'] == 'ref' || $tag['k'] == 'detour' || $tag['k'] == 'destination')
+		if($tag['k'] == 'ref' || $tag['k'] == 'detour' || $tag['k'] == 'destination' || $tag['k'] == 'operator')
 			$values[(string)$tag['k']] = (string) $tag['v'];
 	}
 
@@ -20,17 +20,32 @@ foreach($xml->relation as $relation) {
 		else
 			$det = "unknown";
 
+		if(isset($values['operator']))
+			$op = $values['operator'];
+		else
+			$op = "unknown";
 		$list[$det][$values['ref']] = $values;
+		$listByOp[$op][$det][$values['ref']] = $values; // Store Roads by Operator
 	}
 
 }
 
 // Sort streets
 ksort($list);
+ksort($listByOp);
 
-function output () {
-	global $list;
+function outputByOp ($list) {
 	// Output
+	foreach($list as $op=>$roads) {
+		print "<h2>$op</h2>";
+		print '<div class="accord">';
+		output($roads);
+		print '</div>';
+	}
+}
+
+function output ($list) {
+	// Output List of Roads
 	foreach($list as $detour=>$refs) {
 		print "<h2>$detour</h2>";
 		print "<ul>";
@@ -71,7 +86,7 @@ function outputRefs(&$refs) {
 
 <script>
 $(function() {
-$( "#roadlist" ).accordion({
+$( ".accord" ).accordion({
 heightStyle: "content"
 });
 });
@@ -79,9 +94,10 @@ heightStyle: "content"
 </head>
 <body>
 	<div id="leftside">
-		<h1>List of detour relations by road</h1>
-		<div id="roadlist">
-		<?php output(); ?>
+		<h1>List of detour relations by <?php if(isset($_GET['op'])) echo "operator and "; ?>road</h1>
+		<p><a href="?<?php echo isset($_GET['op'])?"":"op";?>">change view</a></p>
+		<div class="accord">
+		<?php if(!isset($_GET['op']))output($list);else outputByOp($listByOp); ?>
 		</div>
 	</div>
 	<div id="info">
