@@ -107,14 +107,14 @@ function sortNumberCallback($a, $b) {
 <meta charset="utf-8">
 <title>detourViewer</title>
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
 <link rel="stylesheet" href="awesome-markers/leaflet.awesome-markers.css" />
 <link rel="stylesheet" href="style.css" />
 
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 <script src="awesome-markers/leaflet.awesome-markers.js"></script>
 
 <script>
